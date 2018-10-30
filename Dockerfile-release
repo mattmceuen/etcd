@@ -4,6 +4,9 @@ ADD etcd /usr/local/bin/
 ADD etcdctl /usr/local/bin/
 RUN mkdir -p /var/etcd/
 RUN mkdir -p /var/lib/etcd/
+RUN adduser etcd --disabled-password
+RUN chown -R etcd:etcd /var/etcd
+RUN chown -R etcd:etcd /var/lib/etcd
 
 # Alpine Linux doesn't use pam, which means that there is no /etc/nsswitch.conf,
 # but Golang relies on /etc/nsswitch.conf to check the order of DNS resolving
